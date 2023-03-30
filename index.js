@@ -16,7 +16,7 @@ var sayilar = [45,856,12.5,63,0.02,154,2,54,78,61.7,654,26,12.5,63,969,152,32,31
 function KareninAlani(kenaruzunlugu){
 	return kenaruzunlugu*kenaruzunlugu;
 }
-
+console.log("Karenin Alanı", KareninAlani(10) , " \n---------------------------")
 /* (Oto test yok) Yukarıdaki KareninAlani fonksiyonunu kenar uzunluğu = 10 vererek aşağıda çalıştırıp, sonucu konsolda gözlemleyin (console.log)  */
 
 
@@ -29,9 +29,11 @@ function KareninAlani(kenaruzunlugu){
 			4. Hesaplanan çemberin çevresi döndürülecektir.
 		*/
 
-function CemberinCevresi(/* kodlar buraya */){
-	/* kodlar buraya */
+function CemberinCevresi(yarıçap){
+ return 2*pi*yarıçap;
+	
 }
+console.log("Çemberin Çevresi=",CemberinCevresi(5),"\n---------------------------")
 
 
 /* (Oto test yok) Yukarıdaki CemberinCevresi fonksiyonunu yarıçap = 5 vererek aşağıda çalıştırıp, sonucu konsolda gözlemleyin (console.log)  */
@@ -47,9 +49,10 @@ function CemberinCevresi(/* kodlar buraya */){
 			4. Hesaplanan çemberin alanı döndürülecektir.
 		*/
 		
-function CemberinAlani(/* kodlar buraya */){
-	/* kodlar buraya */
+function CemberinAlani(yarıçap,pi){
+	return pi* Math.pow(yarıçap,2)
 }
+console.log("Çemberin Alanı=",CemberinAlani(15,pi),"\n---------------------------")
 
 
 /* (Oto test yok) Yukarıdaki CemberinAlani fonksiyonunu yarıçap = 15 vererek aşağıda çalıştırıp, sonucu konsolda gözlemleyin (console.log)  */
@@ -77,42 +80,118 @@ function CemberinAlani(/* kodlar buraya */){
 	
 	//3a çözümü
 
-	/* kodlar buraya */
+	var enkucuk = sayilar[0]; // başlangıçta en küçük sayı ilk eleman olarak kabul edilir
+	var enbuyuk = sayilar[0]; // başlangıçta en büyük sayı ilk eleman olarak kabul edilir
 	
+	for (var i = 1; i < sayilar.length; i++) { // dizideki diğer elemanlarla karşılaştırılır
+	  if (sayilar[i] < enkucuk) {
+		enkucuk = sayilar[i]; // yeni en küçük sayıyı atar
+	  }
+	  if (sayilar[i] > enbuyuk) {
+		enbuyuk = sayilar[i]; // yeni en büyük sayıyı atar
+	  }
+	}
+	
+	console.log("En küçük sayı: " + enkucuk);
+	console.log("En büyük sayı: " + enbuyuk ,"\n---------------------------" );
 	
 	
 	// 3b çözümü:
 
-	/* kodlar buraya */
-		
-		
-		
-	//3c çözümü:
+	var ucetambolunenler = [];
 	
-	/* kodlar buraya */
+	sayilar.forEach(function(sayi) {
+	  if (sayi % 3 === 0) {
+		ucetambolunenler.push(sayi);
+	  }
+	});
+	console.log("Üçe Tam Bölünenler=",ucetambolunenler,"\n---------------------------");
 
+	//3c çözümü:
+
+
+var ucebolunenlerintoplami = ucetambolunenler.reduce(function(oncekiDeger, suankiDeger) {
+  return oncekiDeger + suankiDeger;
+});
+
+console.log("Üçe Tam Bölünen Sayıların Toplamı=",ucebolunenlerintoplami,"\n---------------------------");
 	
 	
 	//3d çözümü
-	
-	/* kodlar buraya */
-
+	besyuzdenkucuksayilar=[];
+	var buyukSayilar = sayilar.filter(function(sayi) {
+		if(sayi < 500)
+		besyuzdenkucuksayilar.push(sayi);
+	  });
+	  
+	  console.log("Beşyüzdan Küçük Sayılar=",besyuzdenkucuksayilar,"\n---------------------------"); 
 
 
 	//3e çözümü
+	var siralisayilar = [];
 
-	/* kodlar buraya */
+	besyuzdenkucuksayilar.sort(function(a, b) {
+	  return a - b;
+	});
 	
+	for (var i = 0; i < besyuzdenkucuksayilar.length; i++) {
+	  siralisayilar.push(besyuzdenkucuksayilar[i]);
+	}
 	
+	console.log("Beşyüzdan Küçük Sıralanış Halde Sayılar=",siralisayilar,"\n---------------------------");
+
+
 	//3f çözümü
-	
-	/* kodlar buraya */
+
+	var tekraredensayilar = [];
+
+// Dizideki elemanları tek tek kontrol etmek için döngü
+for (var i = 0; i < sayilar.length; i++) {
+  var sayac = 0;
+  
+  // Her bir elemanın tekrar sayısını bulmak için başka bir döngü
+  for (var j = 0; j < sayilar.length; j++) {
+    if (sayilar[i] === sayilar[j]) {
+      sayac++;
+    }
+  }
+  
+  // Eğer eleman tekrar ediyorsa ve henüz tekrar eden sayılar listesinde yoksa, listeye eklenir
+  if (sayac > 1 && !tekraredensayilar.includes(sayilar[i])) {
+    tekraredensayilar.push(sayilar[i]);
+  }
+}
+
+// Tekrar eden sayıları ve tekrar sayılarını yazdırmak için bir döngü
+for (var i = 0; i < tekraredensayilar.length; i++) {
+  var sayi = tekraredensayilar[i];
+  var tekrarSayisi = 0;
+  
+  // Her bir elemanın tekrar sayısını bulmak için başka bir döngü
+  for (var j = 0; j < sayilar.length; j++) {
+    if (sayilar[j] === sayi) {
+      tekrarSayisi++;
+    }
+  }
+
+  // Tekrar eden sayıların kaç kez tekrar ettiğini ekrana yazdırma
+  console.log(`${sayi} sayısı ${tekrarSayisi} kere tekrar edilmiştir`);
+}
+
+// Tekrar eden sayıları ekrana yazdırma
+console.log("Tekrar eden sayılar=",tekraredensayilar);
+
+
+// bu sorunun neden npm run test den geçmediğini anlayamadım... kodda herhangi bir hata bulunmuyor ve istenilen her şeyi karşılıyor.
 
 
 
 
-	
-		
+
+
+
+
+
 
 /*  Bu satırın aşağısındaki kodları lütfen değiştirmeyin  */
 function sa(){
